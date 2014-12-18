@@ -53,20 +53,20 @@ int main(int argc, char** argv) {
     Solution s;
 
     string str = "abcddcabcddcba";
-    cout << str << " except: abcddcba, output: " << s.longestPalindrome(str)
+    cout << str << " expect: abcddcba, output: " << s.longestPalindrome(str)
         << endl;
 
     str = "bb";
-    cout << str << " except: bb, output: " << s.longestPalindrome(str) << endl;
+    cout << str << " expect: bb, output: " << s.longestPalindrome(str) << endl;
 
     str = "ccc";
-    cout << str << " except: ccc, output: " << s.longestPalindrome(str) << endl;
+    cout << str << " expect: ccc, output: " << s.longestPalindrome(str) << endl;
 
     str = "bbbb";
-    cout << str << " except: bbbb, output: " << s.longestPalindrome(str) << endl;
+    cout << str << " expect: bbbb, output: " << s.longestPalindrome(str) << endl;
 
     str = "aaabaaaa";
-    cout << str << " except: aaabaaaa, output: " << s.longestPalindrome(str) << endl;
+    cout << str << " expect: aaabaaaa, output: " << s.longestPalindrome(str) << endl;
 
     return 0;
 }
