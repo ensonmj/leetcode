@@ -6,8 +6,7 @@ struct ListNode
 {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
-    ListNode(int x, ListNode *p) : val(x), next(p) {}
+    ListNode(int x, ListNode *p=nullptr) : val(x), next(p) {}
 };
 
 class Solution
@@ -93,7 +92,7 @@ int main(int argc, char** argv)
     }
     cout << "null" << endl;
 
-    //
+    //0->1
     l1 = new ListNode(5);
     l2 = new ListNode(5);
     head = s.addTwoNumbers(l1, l2);
