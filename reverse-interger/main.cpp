@@ -5,29 +5,52 @@
 
 using namespace std;
 
+//class Solution {
+//    public:
+//        int reverse(int x) {
+//            if(x == 0 || x == -2147483648) {
+//                return 0;
+//            }
+
+//            ostringstream ss;
+//            unsigned long long tmp = (x>0 ? x : -x);
+//            ss << tmp;
+//            string s = ss.str();
+//            std::reverse(s.begin(), s.end());
+//            char *end;
+//            auto y = strtoull(s.c_str(), &end, 10);
+//            if(y>2147483648) {
+//                return 0;
+//            }
+
+//            if(x<0) {
+//                y = -y;
+//            }
+//            return y;
+//        }
+//};
+
+//version 2
 class Solution {
     public:
         int reverse(int x) {
-            if(x == 0 || x == -2147483648) {
+            int ret = 0, n = 0;
+            while(x>9 || x<-9) {
+                n = x % 10;
+                ret = ret * 10 + n;
+                x = x / 10;
+            }
+            n = x % 10;
+            if((ret>magic || (ret==magic && n>7))
+                    || (ret<-magic || (ret==-magic && n>8))) {
                 return 0;
+            } else {
+                return ret * 10 + n;
             }
-
-            ostringstream ss;
-            unsigned long long tmp = (x>0 ? x : -x);
-            ss << tmp;
-            string s = ss.str();
-            std::reverse(s.begin(), s.end());
-            char *end;
-            auto y = strtoull(s.c_str(), &end, 10);
-            if(y>2147483648) {
-                return 0;
-            }
-
-            if(x<0) {
-                y = -y;
-            }
-            return y;
         }
+
+    private:
+        const int magic = 214748364;
 };
 
 int main(int argc, char** argv) {
