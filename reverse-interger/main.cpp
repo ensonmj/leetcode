@@ -41,8 +41,7 @@ class Solution {
                 x = x / 10;
             }
             n = x % 10;
-            if((ret>magic || (ret==magic && n>7))
-                    || (ret<-magic || (ret==-magic && n>8))) {
+            if(ret>magic || ret<-magic) {
                 return 0;
             } else {
                 return ret * 10 + n;
