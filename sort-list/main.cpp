@@ -147,6 +147,10 @@ ListNode *mkList(const char *str) {
             p->next = node;
             p = node;
         }
+
+        if(*end == '\0') {
+            break;
+        }
     }
 
     return head;
