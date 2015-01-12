@@ -94,6 +94,89 @@ void destroy(ListNode *head) {
 //        }
 //};
 
+//class Solution {
+//    public:
+//        ListNode *mergeKLists(vector<ListNode *> &lists) {
+//            if(lists.empty()) {
+//                return nullptr;
+//            }
+
+//            if(lists.size() == 1) {
+//                return lists.front();
+//            }
+
+//            ListNode *head = nullptr, *p = nullptr;
+//            for(auto iter = lists.begin(); iter != lists.end(); ++iter) {
+//                if(!*iter) {
+//                    continue;
+//                }
+//                if(!head) {
+//                    head = p = *iter;
+//                } else {
+//                    while(p->next) {
+//                        p = p->next;
+//                    }
+//                    p->next = *iter;
+//                }
+//           }
+
+//            return sortList(head);
+//        }
+
+//    private:
+//        ListNode *sortList(ListNode *head) {
+//            if(!head || !head->next) {
+//                return head;
+//            }
+
+//            ListNode *p = getMid(head);
+//            ListNode *next = p->next;
+//            p->next = nullptr;
+
+//            return mergeList(sortList(head), sortList(next));
+//        }
+
+//        ListNode *getMid(ListNode *head) {
+//            ListNode *slow = head, *fast=head->next;
+//            while(fast && fast->next) {
+//                slow = slow->next;
+//                fast = fast->next->next;
+//            }
+
+//            return slow;
+//        }
+
+//        ListNode *mergeList(ListNode *first, ListNode *second) {
+//            if(!second) {
+//                return first;
+//            }
+
+//            ListNode *head, *p1, *p2;
+//            if(first->val <= second->val) {
+//                head = p1 =  first;
+//                p2 = second;
+//            } else {
+//                head = p1 = second;
+//                p2 = first;
+//            }
+
+//            while(p1->next && p2) {
+//                if(p1->next->val <= p2->val) {
+//                    p1 = p1->next;
+//                } else {
+//                    ListNode *tmp = p1->next;
+//                    p1->next = p2;
+//                    p1 = p2;
+//                    p2 = tmp;
+//                }
+//            }
+//            p1->next = p2;
+
+//            return head;
+//        }
+//};
+
+//merge directly, more fast
 class Solution {
     public:
         ListNode *mergeKLists(vector<ListNode *> &lists) {
@@ -105,48 +188,24 @@ class Solution {
                 return lists.front();
             }
 
-            ListNode *head = nullptr, *p = nullptr;
-            for(auto iter = lists.begin(); iter != lists.end(); ++iter) {
-                if(!*iter) {
-                    continue;
-                }
-                if(!head) {
-                    head = p = *iter;
-                } else {
-                    while(p->next) {
-                        p = p->next;
-                    }
-                    p->next = *iter;
-                }
-           }
-
-            return sortList(head);
+            return mergeKLists(lists.begin(), lists.end());
         }
 
     private:
-        ListNode *sortList(ListNode *head) {
-            if(!head || !head->next) {
-                return head;
+        ListNode *mergeKLists(vector<ListNode *>::const_iterator begin,
+                vector<ListNode *>::const_iterator end) {
+            int len = end - begin;
+            if(len<=1) {
+                return *begin;
             }
-
-            ListNode *p = getMid(head);
-            ListNode *next = p->next;
-            p->next = nullptr;
-
-            return mergeList(sortList(head), sortList(next));
+            return mergeLists(mergeKLists(begin, begin+len/2),
+                    mergeKLists(begin+len/2, end));
         }
 
-        ListNode *getMid(ListNode *head) {
-            ListNode *slow = head, *fast=head->next;
-            while(fast && fast->next) {
-                slow = slow->next;
-                fast = fast->next->next;
+        ListNode *mergeLists(ListNode *first, ListNode *second) {
+            if(!first) {
+                return second;
             }
-
-            return slow;
-        }
-
-        ListNode *mergeList(ListNode *first, ListNode *second) {
             if(!second) {
                 return first;
             }
