@@ -2,3 +2,8 @@ app
 *.o
 *.swp
 *.swo
+lib/CMakeCache.txt
+lib/CMakeFiles
+lib/Makefile
+lib/cmake_install.cmake
+lib/libutil.so
